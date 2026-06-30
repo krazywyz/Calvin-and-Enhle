@@ -8,10 +8,10 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; }
+body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; padding-bottom: 70px; }
 
 /* INTRO SCREEN */
-.intro-screen { width: 100%; height: 100vh; background: #880e4f; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+.intro-screen { width: 100%; height: 100vh; background: #880e4f; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; position: fixed; top: 0; left: 0; z-index: 9999; transition: opacity 0.5s ease; }
 .intro-text { color: #ff9fd5; font-size: 1.3rem; letter-spacing: 0.3em; text-transform: uppercase; font-family: 'Cormorant Garamond', serif; }
 .intro-title { color: #faf6f0; font-size: 3rem; font-style: italic; font-family: 'Playfair Display', serif; text-align: center; }
 .enter-btn { padding: 0.8rem 2.5rem; border: 1.5px solid #ff69b4; background: transparent; color: #ff9fd5; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; border-radius: 999px; cursor: pointer; }
@@ -38,7 +38,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 #letter { background: #880e4f; padding: 8rem 6rem; }
 .letter-inner { max-width: 700px; margin: 0 auto; }
 .letter-paper { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,105,180,0.15); border-radius: 4px; padding: 3rem 3.5rem; }
-#typed-letter { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: #faf6f0; line-height: 2; font-weight: 300; min-height: 300px; padding-left: 1.5rem; }
+#typed-letter { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: #faf6f0; line-height: 2; font-weight: 300; min-height: 300px; padding-left: 1.5rem; white-space: pre-wrap; }
 
 /* STORY */
 .story-item { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; padding-bottom: 3.5rem; }
@@ -123,7 +123,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 .gallery-cs-sub { font-size: 0.95rem; color: #a91d63; line-height: 1.8; max-width: 420px; margin: 0 auto 2rem; font-weight: 300; }
 .gallery-cs-badge { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid #ec407a; border-radius: 99px; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: #c2185b; }
 
-/* SPOTIFY */
+/* SPOTIFY SECTION */
 #spotify-section { background: #880e4f; padding: 6rem; }
 .spotify-inner { max-width: 700px; margin: 0 auto; text-align: center; }
 .spotify-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 2rem; color: #faf6f0; margin-bottom: 0.6rem; }
@@ -136,26 +136,45 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 #footer { background: #880e4f; color: #faf6f0; padding: 3rem 2rem; text-align: center; }
 .footer-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: #ff69b4; }
 
+/* REFINED BACKGROUND MUSIC PLAYER BAR */
+.music-player-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(136, 14, 79, 0.95); backdrop-filter: blur(8px); border-top: 1px solid rgba(255, 105, 180, 0.2); color: #faf6f0; padding: 0.8rem 2rem; display: flex; align-items: center; justify-content: space-between; z-index: 10000; box-shadow: 0 -4px 20px rgba(0,0,0,0.2); }
+.player-info { display: flex; align-items: center; gap: 1rem; }
+.player-icon { font-size: 1.4rem; animation: pulse 2s infinite ease-in-out; }
+.player-track-details { text-align: left; }
+.player-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: #faf6f0; }
+.player-artist { font-size: 0.75rem; color: #ff9fd5; letter-spacing: 0.05em; text-transform: uppercase; }
+.player-controls { display: flex; align-items: center; }
+.play-btn { background: #ff69b4; border: none; width: 42px; height: 42px; border-radius: 50%; color: #880e4f; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: transform 0.2s, background-color 0.2s; box-shadow: 0 2px 10px rgba(255,105,180,0.4); }
+.play-btn:hover { background: #ff9fd5; transform: scale(1.05); }
+
+/* Hidden YouTube Embed to run the audio stream smoothly */
+#yt-audio-container { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none; }
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; color: #ff69b4; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
 @media(max-width:768px) {
   .section { padding: 4rem 1.5rem; }
   #letter { padding: 4rem 1.5rem; }
   #chat-moments { padding: 4rem 1.5rem; }
   .countdown-grid { grid-template-columns: repeat(2,1fr); }
+  .music-player-bar { padding: 0.8rem 1rem; }
+  .player-title { font-size: 0.95rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- INTRO SCREEN -->
 <div class="intro-screen" id="introScreen">
   <div class="intro-text">A Love Story</div>
   <div class="intro-title">Calvin & Enhle</div>
   <button class="enter-btn" id="enterBtn">Enter</button>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="main-content" id="mainContent">
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
       <div class="hero-eyebrow">Our Story Begins</div>
@@ -165,7 +184,6 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
     </div>
   </section>
 
-  <!-- LETTER -->
   <section id="letter">
     <div class="letter-inner">
       <div class="section-label">Your Birthday Letter</div>
@@ -175,7 +193,6 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
     </div>
   </section>
 
-  <!-- STORY -->
   <section id="story" class="section">
     <div class="section-label">How It All Started</div>
     <div class="story-item">
@@ -222,7 +239,6 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
     </div>
   </section>
 
-  <!-- CHAT MOMENTS -->
   <section id="chat-moments">
     <div class="chat-moments-inner">
       <div class="section-label">Moments I'll Never Forget</div>
@@ -270,55 +286,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
     </div>
   </section>
 
-  <!-- TIMER -->
   <section id="timer-section">
     <div class="timer-inner">
       <div class="section-label">Time Together</div>
-      <div class="timer-title">Every Moment Counts</div>
-      <div class="countdown-grid">
-        <div class="cd-box">
-          <div class="cd-num" id="timer-days">0</div>
-          <div class="cd-unit">Days</div>
-        </div>
-        <div class="cd-box">
-          <div class="cd-num" id="timer-hours">0</div>
-          <div class="cd-unit">Hours</div>
-        </div>
-        <div class="cd-box">
-          <div class="cd-num" id="timer-minutes">0</div>
-          <div class="cd-unit">Minutes</div>
-        </div>
-        <div class="cd-box">
-          <div class="cd-num" id="timer-seconds">0</div>
-          <div class="cd-unit">Seconds</div>
-        </div>
-      </div>
-      <p class="timer-sub">Since the day you said "Heyyyy" back to me</p>
-    </div>
-  </section>
-
-  <!-- TIMELINE -->
-  <section id="timeline" class="section">
-    <div class="section-label">Key Moments in Our Journey</div>
-    <div class="tl-item">
-      <div class="tl-date">12 JAN 2026</div>
-      <div class="tl-content">
-        <h4>First Sight</h4>
-        <p>I saw you on TikTok Live and knew I had to reach out to you.</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">21 JAN 2026</div>
-      <div class="tl-content">
-        <h4>Your Birthday & My Proposal</h4>
-        <p>I told you everything I felt and asked you to be mine forever. You said yes, and my world changed.</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">31 MAY 2026</div>
-      <div class="tl-content">
-        <h4>Deep Affirmations</h4>
-        <p>I needed you to know exactly how much you mean to me, so I told you everything.</p>
-      </div>
-    </div>
-    <div c
+     
