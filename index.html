@@ -23,8 +23,8 @@ body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans
 body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' fill='rgba(0,0,0,0.02)'/%3E%3C/svg%3E"); pointer-events: none; mix-blend-mode: overlay; }
 
 /* MUSIC PLAYER */
-#music-player { position: fixed; bottom: 2rem; right: 2rem; z-index: 800; display: flex; align-items: center; gap: 0.6rem; background: var(--ink); color: var(--cream); padding: 0.6rem 1rem; border-radius: 999px; box-shadow: 0 12px 40px rgba(0,0,0,0.15); opacity: 0; transform: translateY(8px); transition: opacity 0.28s ease, transform 0.28s ease; }
-#music-player.visible { opacity: 0.9; transform: translateY(0); }
+#music-player { position: fixed; bottom: 2rem; right: 2rem; z-index: 800; display: flex; align-items: center; gap: 0.6rem; background: var(--ink); color: var(--cream); padding: 0.6rem 1rem; border-radius: 999px; box-shadow: 0 12px 40px rgba(0,0,0,0.15); opacity: 0; transform: translateY(8px); transition: opacity 0.28s ease, transform 0.28s ease; pointer-events: none; }
+#music-player.visible { opacity: 0.9; transform: translateY(0); pointer-events: auto; }
 #music-player:hover { opacity: 1; }
 .music-dot { width: 4px; height: 14px; border-radius: 2px; background: var(--gold); animation: musicPulse 1.2s ease-in-out infinite; }
 .music-dot:nth-child(2){animation-delay:0.15s;} .music-dot:nth-child(3){animation-delay:0.3s;} .music-dot:nth-child(4){animation-delay:0.45s;}
@@ -39,15 +39,16 @@ body::before { content: ''; position: fixed; inset: 0; background-image: url("da
 @keyframes twinkle { 0%,100%{opacity:0.1;} 50%{opacity:0.8;} }
 
 /* INTRO */
-#intro { position: fixed; inset: 0; background: var(--ink); display: flex; align-items: center; justify-content: center; z-index: 1000; flex-direction: column; gap: 1.5rem; transition: opacity 0.8s ease, visibility 0.8s ease; }
+#intro { position: fixed; inset: 0; background: var(--ink); display: flex; align-items: center; justify-content: center; z-index: 1000; flex-direction: column; gap: 1.5rem; transition: opacity 0.8s ease, visibility 0.8s ease; opacity: 1; visibility: visible; }
 #intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .intro-text { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); font-size: clamp(1rem,2.5vw,1.3rem); letter-spacing: 0.3em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
 .intro-name { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cream); font-size: clamp(2rem,5vw,3rem); opacity: 0; animation: fadeUp 1s ease 1s forwards; text-align: center; }
-.intro-btn { margin-top: 1rem; padding: 0.8rem 2.5rem; border: 1.5px solid var(--gold); background: transparent; color: var(--gold-light); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; border-radius: 999px; cursor: pointer; }
+.intro-btn { margin-top: 1rem; padding: 0.8rem 2.5rem; border: 1.5px solid var(--gold); background: transparent; color: var(--gold-light); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; border-radius: 999px; cursor: pointer; transition: all 0.3s ease; z-index: 1001; position: relative; }
 .intro-btn:hover { background: var(--gold); color: var(--ink); }
+.intro-btn:active { transform: scale(0.95); }
 
-main { opacity: 0; transition: opacity 0.8s ease 0.2s; }
-main.visible { opacity: 1; }
+main { opacity: 0; transition: opacity 0.8s ease 0.2s; visibility: hidden; }
+main.visible { opacity: 1; visibility: visible; }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes expandWidth { from { width: 0; } to { width: 60px; } }
@@ -198,5 +199,4 @@ main.visible { opacity: 1; }
 .gallery-coming-soon { text-align: center; padding: 5rem 2rem; border: 1px dashed rgba(236,64,122,0.3); border-radius: 24px; background: rgba(255,255,255,0.4); position: relative; overflow: hidden; }
 .gallery-coming-soon::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%,rgba(236,64,122,0.06) 0%,transparent 70%); }
 .gallery-cs-icon { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; animation: floatIcon 3s ease-in-out infinite; }
-@keyframes floatIcon { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
-.gallery-cs-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,6vw,3.5rem); font-weight: 300; font-style: italic; color: var(--deep); m
+@keyframes floatIcon { 
