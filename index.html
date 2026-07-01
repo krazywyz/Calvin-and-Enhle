@@ -6,20 +6,32 @@
 <title>calvin-and-enhle💕</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; }
 
-.intro-screen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #880e4f; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; }
-.intro-screen.hidden { display: none; }
+.intro { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #880e4f; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; }
 
 .intro-text { font-family: 'Cormorant Garamond', serif; color: #ff9fd5; font-size: 1.3rem; letter-spacing: 0.3em; text-transform: uppercase; }
 .intro-name { font-family: 'Playfair Display', serif; font-style: italic; color: #faf6f0; font-size: 3rem; text-align: center; margin: 1rem 0; }
-.enter-btn { padding: 0.8rem 2.5rem; border: 1.5px solid #ff69b4; background: transparent; color: #ff9fd5; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; border-radius: 999px; cursor: pointer; margin-top: 1rem; }
+
+.enter-btn { 
+  padding: 0.8rem 2.5rem; 
+  border: 1.5px solid #ff69b4; 
+  background: transparent; 
+  color: #ff9fd5; 
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 0.85rem; 
+  letter-spacing: 0.12em; 
+  border-radius: 999px; 
+  cursor: pointer; 
+  margin-top: 1rem;
+}
+
 .enter-btn:hover { background: #ff69b4; color: #880e4f; }
 
-.main-content { display: none; }
-.main-content.show { display: block; }
+.content { width: 100%; min-height: 100vh; }
+.hidden { display: none !important; }
 
 /* HERO */
 #hero { min-height: 100vh; display: grid; place-items: center; padding: 4rem 2rem; background: #faf6f0; }
@@ -45,9 +57,8 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 #chat-moments { background: #fce4ec; padding: 8rem 6rem; }
 .chat-moments-inner { max-width: 900px; margin: 0 auto; }
 .chat-moment-item { background: white; border-left: 4px solid #ec407a; padding: 2rem; margin-bottom: 2rem; border-radius: 8px; }
-.chat-date { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ff69b4; margin-bottom: 0.8rem; }
+.chat-date { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ff69b4; margin-bottom: 0.8rem; font-weight: 500; }
 .chat-message { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: #880e4f; line-height: 1.7; font-style: italic; margin: 0.8rem 0; }
-.chat-sender { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: #ec407a; font-weight: 500; }
 
 /* TIMER */
 #timer-section { background: #880e4f; color: #faf6f0; padding: 6rem; text-align: center; }
@@ -60,7 +71,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 /* TIMELINE */
 #timeline { background: #faf6f0; }
 .tl-item { display: flex; gap: 2rem; padding: 1.5rem 0 2.5rem 2rem; }
-.tl-date { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ff69b4; min-width: 100px; }
+.tl-date { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ff69b4; min-width: 100px; font-weight: 500; }
 .tl-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #c2185b; margin-bottom: 0.3rem; }
 .tl-content p { font-size: 0.9rem; color: #a91d63; line-height: 1.7; font-weight: 300; }
 
@@ -73,19 +84,15 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 .distance-icon { font-size: 1.5rem; width: 48px; height: 48px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: #c2185b; }
 .stat-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #ec407a; margin-top: 0.2rem; }
-.map-card { border-radius: 20px; overflow: hidden; box-shadow: 0 12px 40px rgba(194,24,91,0.15); }
-.map-label { background: white; padding: 1rem 1.4rem; display: flex; align-items: center; gap: 0.7rem; border-bottom: 1px solid #fde8e8; font-size: 0.85rem; color: #c2185b; font-family: 'Cormorant Garamond', serif; }
-.map-iframe { width: 100%; height: 300px; border: none; display: block; }
-.map-open-btn { display: block; width: 100%; background: linear-gradient(135deg,#ec407a,#c2185b); color: white; text-align: center; padding: 0.85rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; text-decoration: none; }
 
 /* LOVE */
 #love { background: #880e4f; color: #faf6f0; padding: 8rem 6rem; }
 .love-inner { max-width: 1100px; margin: 0 auto; }
-.love-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; font-style: italic; color: #faf6f0; line-height: 1.2; }
+.love-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; font-style: italic; color: #faf6f0; line-height: 1.2; margin-bottom: 3rem; }
 .love-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5px; background: rgba(255,255,255,0.06); }
 .love-card { background: #880e4f; padding: 2.5rem 2rem; }
 .love-card:hover { background: #520034; }
-.love-num { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: #ff69b4; margin-bottom: 1rem; }
+.love-num { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: #ff69b4; margin-bottom: 1rem; font-weight: 500; }
 .love-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: #faf6f0; line-height: 1.5; }
 .love-sub { margin-top: 0.8rem; font-size: 0.85rem; color: rgba(250,246,240,0.45); line-height: 1.7; }
 
@@ -94,7 +101,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 .counter-inner { max-width: 500px; margin: 0 auto; }
 .counter-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 2rem; color: #c2185b; margin-bottom: 2rem; }
 .counter-num { font-family: 'Cormorant Garamond', serif; font-size: 8rem; font-weight: 300; color: #ec407a; line-height: 1; }
-.counter-sub { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ff69b4; margin-top: 0.5rem; margin-bottom: 2rem; }
+.counter-sub { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ff69b4; margin-top: 0.5rem; margin-bottom: 2rem; font-weight: 500; }
 .counter-btn { padding: 0.9rem 2.5rem; background: #880e4f; color: #faf6f0; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 999px; cursor: pointer; }
 .counter-btn:hover { background: #c2185b; }
 
@@ -105,6 +112,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 .voice-sub { font-size: 0.9rem; color: rgba(250,246,240,0.5); line-height: 1.7; margin-bottom: 2.5rem; }
 .voice-placeholder { background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,105,180,0.3); border-radius: 20px; padding: 2.5rem; }
 .voice-placeholder p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(250,246,240,0.4); }
+.voice-placeholder span { font-size: 3rem; display: block; margin-bottom: 1rem; }
 
 /* GALLERY */
 #gallery { background: #fce4ec; padding: 8rem 6rem; }
@@ -113,7 +121,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 .gallery-cs-icon { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; }
 .gallery-cs-title { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; font-style: italic; color: #c2185b; margin-bottom: 1rem; }
 .gallery-cs-sub { font-size: 0.95rem; color: #a91d63; line-height: 1.8; max-width: 420px; margin: 0 auto 2rem; font-weight: 300; }
-.gallery-cs-badge { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid #ec407a; border-radius: 99px; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: #c2185b; }
+.gallery-cs-badge { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid #ec407a; border-radius: 99px; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: #c2185b; font-weight: 500; }
 
 /* SPOTIFY */
 #spotify-section { background: #880e4f; padding: 6rem; }
@@ -121,8 +129,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 .spotify-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 2rem; color: #faf6f0; margin-bottom: 0.6rem; }
 .spotify-sub { font-size: 0.85rem; color: rgba(250,246,240,0.45); margin-bottom: 2rem; }
 .spotify-placeholder { background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,105,180,0.3); border-radius: 20px; padding: 3rem; text-align: center; }
-.spotify-placeholder p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: rgba(250,246,240,0.4); margin-bottom: 1rem; }
-.spotify-link { color: #ff69b4; text-decoration: none; font-size: 0.9rem; }
+.spotify-link { color: #ff69b4; text-decoration: none; font-size: 0.9rem; font-weight: 500; }
 
 /* FOOTER */
 #footer { background: #880e4f; color: #faf6f0; padding: 3rem 2rem; text-align: center; }
@@ -139,20 +146,20 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 </head>
 <body>
 
-<!-- INTRO SCREEN -->
-<div class="intro-screen" id="introScreen">
+<!-- INTRO -->
+<div class="intro" id="intro">
   <div class="intro-text">A Love Story</div>
   <div class="intro-name">Calvin & Enhle</div>
-  <button class="enter-btn" id="enterBtn">Enter</button>
+  <button class="enter-btn" onclick="showContent()">Enter</button>
 </div>
 
 <!-- MAIN CONTENT -->
-<div class="main-content" id="mainContent">
+<div class="content" id="content">
   <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
       <h1 class="hero-title">Calvin <em>& Enhle</em></h1>
-      <p class="hero-sub">A love that started with a simple text on a live stream and blossomed into something extraordinary. This is our journey through distance, growth, and endless devotion.</p>
+      <p class="hero-sub">A love that started with a simple text on a live stream and blossomed into something extraordinary.</p>
     </div>
   </section>
 
@@ -178,8 +185,8 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
     <div class="story-item">
       <div class="story-num">2</div>
       <div class="story-content">
-        <h3>First Message — Late January 2026</h3>
-        <p>After weeks of gathering the courage, I finally texted you with a simple "Heyy". Your confused but cute response "Heyyyy" made my heart skip a beat. In that moment, everything changed.</p>
+        <h3>First Message</h3>
+        <p>After weeks of gathering courage, I finally texted you "Heyy". Your response "Heyyyy" made my heart skip a beat.</p>
       </div>
     </div>
 
@@ -187,7 +194,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
       <div class="story-num">3</div>
       <div class="story-content">
         <h3>Your Birthday & My Proposal — 21 January 2026</h3>
-        <p>On your birthday, I did something I'd been dreaming about. I sent you a heartfelt letter at 5:31 AM, pouring out everything I felt. You made me feel valued, heard, cared for, and truly loved for the first time.</p>
+        <p>I sent you a heartfelt letter pouring out everything I felt. You made me feel valued, heard, and truly loved for the first time.</p>
       </div>
     </div>
 
@@ -195,7 +202,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
       <div class="story-num">4</div>
       <div class="story-content">
         <h3>Growing Together</h3>
-        <p>We've had arguments and misunderstandings. But what made our relationship unbreakable was our ability to apologize, forgive, and choose each other every single time.</p>
+        <p>We've had moments of doubt, but what made us unbreakable was our ability to apologize, forgive, and choose each other.</p>
       </div>
     </div>
 
@@ -203,7 +210,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
       <div class="story-num">5</div>
       <div class="story-content">
         <h3>The Hardest Test — 6 Hours Apart</h3>
-        <p>We broke up once, but only for 6 hours. When you came back from school, we talked and found our way back to each other. That moment proved our connection is stronger than any distance.</p>
+        <p>We broke up once, but only for 6 hours. That moment proved our connection is stronger than any distance.</p>
       </div>
     </div>
 
@@ -211,7 +218,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
       <div class="story-num">6</div>
       <div class="story-content">
         <h3>Distance Can't Define Us</h3>
-        <p>382 km apart. But these numbers mean nothing compared to the strength of what we share. Every message strengthens our bond even more.</p>
+        <p>382 km apart, but these numbers mean nothing compared to what we share.</p>
       </div>
     </div>
   </section>
@@ -221,7 +228,6 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
     <div class="chat-moments-inner">
       <div class="chat-moment-item">
         <div class="chat-date">12 January 2026</div>
-        <div class="chat-sender">Our First Conversation</div>
         <div class="chat-message">"Heyy"</div>
         <div class="chat-message" style="color: #ec407a;">"Heyyyy"</div>
         <p style="font-size: 0.9rem; color: #888; margin-top: 1rem;">This simple exchange started everything.</p>
@@ -229,14 +235,12 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
 
       <div class="chat-moment-item">
         <div class="chat-date">21 January 2026</div>
-        <div class="chat-sender">Your Birthday Letter</div>
         <div class="chat-message">"Happy Birthday to the most beautiful, gorgeous, amazing girl I've ever met…"</div>
         <div class="chat-message">"For the first time, you actually made me feel valued, cared about, heard, and loved."</div>
       </div>
 
       <div class="chat-moment-item">
         <div class="chat-date">31 May 2026</div>
-        <div class="chat-sender">My Truth About You</div>
         <div class="chat-message">"I hope you really do know how I love you and how much I care about you…"</div>
         <div class="chat-message">"I love you, A LOT ❤️❤️❤️"</div>
       </div>
@@ -272,7 +276,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
       <div class="tl-date">12 JAN 2026</div>
       <div class="tl-content">
         <h4>First Sight</h4>
-        <p>I saw you on TikTok Live and knew I had to reach out to you.</p>
+        <p>I saw you on TikTok Live and knew I had to reach out.</p>
       </div>
     </div>
 
@@ -326,7 +330,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
   <!-- LOVE REASONS -->
   <section id="love">
     <div class="love-inner">
-      <h2 class="love-header" style="font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; font-style: italic; color: #faf6f0; line-height: 1.2; margin-bottom: 3rem;">Why You're Everything to Me</h2>
+      <h2 class="love-header">Why You're Everything to Me</h2>
       <div class="love-grid">
         <div class="love-card">
           <span class="love-num">01</span>
@@ -368,7 +372,7 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
       <div class="counter-title">I Love You Counter</div>
       <div class="counter-num" id="loveCounter">∞</div>
       <div class="counter-sub">And Counting</div>
-      <button class="counter-btn" id="loveBtn">I Love You Too</button>
+      <button class="counter-btn" id="loveBtn" onclick="addLove()">I Love You Too</button>
     </div>
   </section>
 
@@ -381,3 +385,53 @@ body { background: #faf6f0; color: #880e4f; font-family: 'DM Sans', sans-serif; 
         <span>🎙️</span>
         <p>Your voice message will appear here when ready</p>
       </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="gallery-inner">
+      <div class="gallery-coming-soon">
+        <span class="gallery-cs-icon">📸</span>
+        <h3 class="gallery-cs-title">Coming Soon</h3>
+        <p class="gallery-cs-sub">Our most precious moments will be displayed here.</p>
+        <span class="gallery-cs-badge">Photos Loading</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPOTIFY -->
+  <section id="spotify-section">
+    <div class="spotify-inner">
+      <div class="spotify-title">Superpowers - Daniel Caesar</div>
+      <p class="spotify-sub">Like you give me superpowers just by existing.</p>
+      <div class="spotify-placeholder">
+        <a href="https://youtu.be/rScwLoES2bM" target="_blank" class="spotify-link">Watch on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <p class="footer-text">made with love ~ Calvin</p>
+  </footer>
+</div>
+
+<script>
+function showContent() {
+  document.getElementById('intro').classList.add('hidden');
+  startTyping();
+  startTimer();
+}
+
+const letterText = `Happy Birthday to the most beautiful, gorgeous, amazing, wonderful, sweet-hearted, caring, one of a kind girl I've ever met…
+
+For the first time, you actually made me feel valued, cared about, heard, and loved.
+
+You actually make me feel happy without even trying…
+
+The description I gave off about my type was actually you.❤️
+
+Happy birthday sweerie baby ❤️❤️😝😝😝`;
+
+function star
